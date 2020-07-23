@@ -1,0 +1,7 @@
+FROM maven:3.6.3-jdk-8-slim
+COPY ./ /usr/maven
+WORKDIR /usr/maven
+RUN mvn clean package -DskipTests && mkdir -p /usr/app && cp target/hello-world.jar /usr/app/
+WORKDIR /usr/app
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","hello-world.jar"]
